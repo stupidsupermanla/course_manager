@@ -1,0 +1,11 @@
+server:
+    port: 8900
+    servlet:
+        context-path: /manage
+
+
+logging:
+    pattern.console: "[%d{yyyy-MM-dd HH:mm:ss.SSS}] %clr(%-5level) %clr([%15.15thread]){magenta} ---  %clr(%40.40logger{39}){cyan} :  %msg%n"
+    pattern.file: "[%d{yyyy-MM-dd HH:mm:ss.SSS}] %-5level [%15.15thread]---  %40.40logger{39} :  %msg%n"
+#    level.com.boot.dao: debug
+    file: ./logs/app

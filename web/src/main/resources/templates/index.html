@@ -6,8 +6,92 @@
     <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="webjars/jquery/3.1.1/jquery.min.js"></script>
     <title>用户登陆</title>
+
+
+    <style>
+        .top_div {
+            background: #008ead;
+            width: 90%;
+            margin: 5%;
+            height: 900px;
+        }
+    </style>
+
+    <script>
+        $(function () {
+            $("#name").focus();
+            $("#submit").click(function () {
+                var name = $("#name").val();
+                var password = $("#password").val();
+                console.log(name)
+                console.log(password)
+                if (name == null || name == "") {
+                    alert('请输入帐号!');
+                    return
+                }
+                if (password == null || password == "") {
+                    alert('请输入密码!');
+                    return
+                }
+                $.post('/user/login', {
+                    name: name,
+                    password: password
+                }, function (result) {
+                    if (result.success) {
+                        $("#name").val("");
+                        $("#password").val("");
+                        alert(result.msg);
+                        // window.location.href = "";
+                    } else {
+                        alert(result.msg);
+                    }
+                }, 'json');
+            })
+
+            $("#reset").click(function () {
+                $("#name").val("");
+                $("#password").val("");
+            })
+        });
+    </script>
 </head>
 <body>
+<div class="top_div">
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3" style="margin-top: 200px">
+            <div class="well">
+                <h3 style="text-align: center">
+                    用户登录
+                </h3>
+                <form id="fm" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">帐号</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="name" autocomplete="off" placeholder="请输入帐号"
+                                   class="form-control">
+                        </div>
+                        <!--<div class="col-sm-2"></div>-->
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-sm-2 control-label">密码</label>
+                        <div class="col-sm-8">
+                            <input type="password" id="password" autocomplete="off" placeholder="请输入密码"
+                                   class="form-control">
+                        </div>
+                        <!--<div class="col-sm-2"></div>-->
+                    </div>
 
+                    <div class="form-group">
+                        <div class="col-sm-10 col-sm-offset-2">
+                            <button class="btn btn-default" id="submit">登陆</button>
+                            <button class="btn btn-default" type="reset" id="reset">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 </body>
 </html>
